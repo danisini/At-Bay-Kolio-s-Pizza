@@ -126,33 +126,17 @@ public class Pizza extends Product {
     }
     public void buyPizza()
     {
-        String[] nameArray;
-        nameArray= new String[128];
-        Double[] prBArray={0.0};
-        prBArray= new Double[128];
-        Double[] prNArray={0.0};
-        prNArray= new Double[128];
-        Double[] winArray={0.0};
-        winArray= new Double[128];
-        Integer[] inHandArray={0};
-        inHandArray= new Integer[128];
-        String[] pizzaArray;
-        pizzaArray= new String[128];
+        String[][] pizzaArray;
+        pizzaArray= new String[128][8];
         int indx=0;
         try {
             File myObj = new File("pizza.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-                pizzaArray[indx]="";
                 for(int i=0;i<5;i++)
                 {
                     String data = myReader.nextLine();
-                    if(i==0)nameArray[indx]=data;
-                    if(i==1)prBArray[indx]=Double.valueOf(data);
-                    if(i==2)prNArray[indx]=Double.valueOf(data);
-                    if(i==3)winArray[indx]=Double.valueOf(data);
-                    if(i==4)inHandArray[indx]=Integer.valueOf(data);
-                    pizzaArray[indx]+=data+" ";
+                    pizzaArray[indx][i]=data;
                     System.out.println(data);
                 }
                 indx++;
@@ -165,32 +149,48 @@ public class Pizza extends Product {
         System.out.print("Въведете номера на пицата, която ще поръчате:");
         Scanner in=new Scanner(System.in);
         int numPizza=in.nextInt();
-        //TODO pechalba failut prn-prb
-        inHandArray[numPizza]--;
-
+        int nowValue=Integer.valueOf(pizzaArray[numPizza-1][4])-1;
+        pizzaArray[numPizza-1][4]=String.valueOf(nowValue);
         try {
             File pizzaFile= new File("pizza.txt");
             FileWriter myWriter = new FileWriter(pizzaFile);
             for(int i=0;i<indx;i++)
-            {
-                myWriter.write(nameArray[i]);
-                myWriter.write(newline);
-                myWriter.write(String.valueOf(prBArray[i]));
-                myWriter.write(newline);
-                myWriter.write(String.valueOf(prNArray[i]));
-                myWriter.write(newline);
-                myWriter.write(String.valueOf(winArray[i]));
-                myWriter.write(newline);
-                myWriter.write(String.valueOf(inHandArray[i]));
-                myWriter.write(newline);
-
-            }
+                for(int j=0;j<5;j++)
+                    myWriter.write(pizzaArray[i][j]+newline);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
+        double win=Double.valueOf(pizzaArray[numPizza-1][3])-Double.valueOf(pizzaArray[numPizza-1][2]);
+        Double[] winning;
+        int ind=0;
+        winning= new Double[8];
+        try {
+            File myObj = new File("money.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                winning[ind]=Double.valueOf(data);
+                ind++;
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        winning[0]+=win;
+        winning[3]+=win;
+        try {
+            File moneyFile= new File("money.txt");
+            FileWriter myWriter = new FileWriter(moneyFile);
+            for(int i=0;i<4;i++)
+                myWriter.write(String.valueOf(winning[i])+newline);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }
