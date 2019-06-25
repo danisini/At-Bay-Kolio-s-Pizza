@@ -3,10 +3,10 @@ package com.company;
 import java.util.Scanner;
 
 public class Product {
-    private double moneyBought, moneySold, moneyTaken;
+    private double moneyBought, moneySold;
     private int inHand;
-
-    public Product()
+    public static String newline = System.getProperty("line.separator");
+    public void newOne()
     {
         Scanner in=new Scanner(System.in);
         System.out.print("въведете колко струваше:");
@@ -15,11 +15,10 @@ public class Product {
         moneySold=in.nextDouble();
         System.out.print("въведете наличност:");
         inHand=in.nextInt();
-        moneyTaken=0.0;
 
     }
     public String getInfo()
     {
-        return '\n'+String.valueOf(moneyBought)+'\n'+String.valueOf(moneySold)+'\n'+String.valueOf(moneyTaken)+'\n'+ String.valueOf(inHand);
+        return newline+String.valueOf(moneyBought)+newline+String.valueOf(moneySold)+newline+ String.valueOf(inHand);
     }
 }
