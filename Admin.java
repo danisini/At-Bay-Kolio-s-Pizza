@@ -55,9 +55,8 @@ public class Admin {
         {
             System.out.print("За пици-въведете 1, за напитки-2, за десерти-3:");
             int typeProduct=in.nextInt();
-            if(typeProduct==1)
-            {
-                System.out.println("Ако искате да въведете нова пица-въведете 0,за редактиране-веведете номера на пицата:");
+            if(typeProduct==1) {
+                System.out.println("Ако искате да въведете нова пица-въведете 0,за редактиране-веведете номера на пицата,за отблеязване на фира-въведете -1:");
                 try {
                     File myObj = new File("pizza.txt");
                     Scanner myReader = new Scanner(myObj);
@@ -71,7 +70,13 @@ public class Admin {
                     e.printStackTrace();
                 }
                 //
-                int pizzaNumber=in.nextInt();
+                int pizzaNumber = in.nextInt();
+                if (pizzaNumber == -1)
+                {
+                    Pizza pizza=new Pizza();
+                    pizza.Wastage();
+                }
+                else
                 if(pizzaNumber==0)
                 {
                     Pizza pizza=new Pizza();

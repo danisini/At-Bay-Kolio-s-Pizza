@@ -166,7 +166,7 @@ public class Pizza extends Product {
         double win = Double.valueOf(pizzaArray[numPizza - 1][3]) - Double.valueOf(pizzaArray[numPizza - 1][2]);
         Double[] winning;
         int ind = 0;
-        winning = new Double[8];
+        winning = new Double[16];
         try {
             File myObj = new File("money.txt");
             Scanner myReader = new Scanner(myObj);
@@ -185,7 +185,79 @@ public class Pizza extends Product {
         try {
             File moneyFile = new File("money.txt");
             FileWriter myWriter = new FileWriter(moneyFile);
-            for(int i = 0 ; i < 4 ; i ++)
+            for(int i = 0 ; i < 9 ; i ++)
+                myWriter.write(String.valueOf(winning[i]) + newline);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    public void Wastage()
+    {
+        System.out.print("Въведете номер на пица:");
+        Scanner in =new Scanner(System.in);
+        int numberPizza = in.nextInt();
+        System.out.print("Въведете брой пици фира от този номер:");
+        int cntPizza = in.nextInt();
+        Double[] winning;
+        int ind = 0;
+        winning = new Double[16];
+        try {
+            File myObj = new File("money.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                winning[ind] = Double.valueOf(data);
+                ind ++;
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        String[][] pizzaArray;
+        pizzaArray = new String[128][8];
+        int indx = 0;
+        try {
+            File myObj = new File("pizza.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                for(int i = 0 ; i < 5 ; i ++)
+                {
+                    String data = myReader.nextLine();
+                    pizzaArray[indx][i] = data;
+                }
+                indx ++;
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        int lost=Integer.valueOf(pizzaArray[numberPizza-1][4])-cntPizza;
+        pizzaArray[numberPizza-1][4]=String.valueOf(lost);
+        double lose=cntPizza*Double.valueOf(pizzaArray[numberPizza-1][2]);
+        winning[4]+=lose;
+        winning[7]+=lose;
+        winning[8]+=lose;
+
+        try {
+            File pizzaFile = new File("pizza.txt");
+            FileWriter myWriter = new FileWriter(pizzaFile);
+            for(int i = 0 ; i < indx ; i++)
+                for(int j = 0 ; j < 5 ; j ++)
+                    myWriter.write(pizzaArray[i][j] + newline);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        try {
+            File moneyFile = new File("money.txt");
+            FileWriter myWriter = new FileWriter(moneyFile);
+            for(int i = 0 ; i < 9 ; i ++)
                 myWriter.write(String.valueOf(winning[i]) + newline);
             myWriter.close();
         } catch (IOException e) {
