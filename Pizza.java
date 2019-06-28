@@ -121,7 +121,7 @@ public class Pizza extends Product {
     public void Wastage()
     {
         System.out.print("Въведете номер на пица:");
-        Scanner in =new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         int numberPizza = in.nextInt();
         System.out.print("Въведете брой пици фира от този номер:");
         int cntPizza = in.nextInt();
@@ -134,13 +134,13 @@ public class Pizza extends Product {
         pizzaArray = new String[128][8];
         pizzaArray = fM.FileRead("pizza.txt");
         int indx = seeLenght(pizzaArray);
-        int lost=Integer.valueOf(pizzaArray[numberPizza-1][4])-cntPizza;
-        pizzaArray[numberPizza-1][4]=String.valueOf(lost);
-        double lose=cntPizza*Double.valueOf(pizzaArray[numberPizza-1][2]);
-        winning[4]+=lose;
-        winning[7]+=lose;
-        winning[8]+=lose;
-        fM.FileWrite("pizza.txt",pizzaArray,indx);
+        int lost = Integer.valueOf(pizzaArray[numberPizza - 1][4])-cntPizza;
+        pizzaArray[numberPizza - 1][4] = String.valueOf(lost);
+        double lose = cntPizza*Double.valueOf(pizzaArray[numberPizza - 1][2]);
+        winning[4] += lose;
+        winning[7] += lose;
+        winning[8] += lose;
+        fM.FileWrite("pizza.txt" , pizzaArray , indx);
         fM.FileWriteMoney(winning);
     }
 }
