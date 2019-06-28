@@ -17,8 +17,16 @@ public class Product {
         inHand=in.nextInt();
 
     }
-    public String getInfo()
+    public String getMoneyBought()
     {
-        return newline+String.valueOf(moneyBought)+newline+String.valueOf(moneySold)+newline+ String.valueOf(inHand);
+        return String.valueOf(moneyBought);
+    }
+    public String getMoneySold()
+    {
+        return String.valueOf(moneySold);
+    }
+    public String getInHand()
+    {
+        return String.valueOf(inHand);
     }
 }
