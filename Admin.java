@@ -73,18 +73,18 @@ public class Admin {
                 int pizzaNumber = in.nextInt();
                 if (pizzaNumber == -1)
                 {
-                    Pizza pizza=new Pizza();
+                    Pizza pizza = new Pizza();
                     pizza.Wastage();
                 }
                 else
-                if(pizzaNumber==0)
+                if(pizzaNumber == 0)
                 {
-                    Pizza pizza=new Pizza();
+                    Pizza pizza = new Pizza();
                     pizza.newPizza();
                 }
                 else
                 {
-                    Pizza now=new Pizza();
+                    Pizza now = new Pizza();
                     now.EditPizza(pizzaNumber);
                 }
             }
@@ -105,18 +105,24 @@ public class Admin {
                 }
                 //
                 int drinkNumber=in.nextInt();
-                if(drinkNumber==0)
+                if (drinkNumber == -1)
                 {
-                    new Drink();
+                    Drink dr = new Drink();
+                    dr.Wastage();
+                }
+                else
+                if(drinkNumber == 0)
+                {
+                    Drink dr = new Drink();
+                    dr.newDrink();
                 }
                 else
                 {
-                    Drink now=new Drink();
-                    now.EditDrink(drinkNumber);
+                    Drink dr = new Drink();
+                    dr.EditDrink(drinkNumber);
                 }
             }
-            else if(typeProduct==3)
-            {
+            else if(typeProduct == 3) {
                 System.out.println("Ако искате да въведете нов десерт-въведете 0,за редактиране-веведете номера на десерта:");
                 try {
                     File myObj = new File("desert.txt");
@@ -131,15 +137,16 @@ public class Admin {
                     e.printStackTrace();
                 }
                 //
-                int desertNumber=in.nextInt();
-                if(desertNumber==0)
-                {
-                    new Desert();
-                }
-                else
-                {
-                    Desert now=new Desert();
-                    now.EditDesert(desertNumber);
+                int desertNumber = in.nextInt();
+                if (desertNumber == -1) {
+                    Desert de = new Desert();
+                    de.Wastage();
+                } else if (desertNumber == 0) {
+                    Desert de = new Desert();
+                    de.newDesert();
+                } else {
+                    Desert de = new Desert();
+                    de.EditDesert(desertNumber);
                 }
             }
         }

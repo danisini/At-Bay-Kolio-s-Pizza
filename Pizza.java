@@ -42,11 +42,11 @@ public class Pizza extends Product {
         String moneySold = pizza.getMoneySold();
         String moneyInHand = pizza.getInHand();
         int indx = seeLenght(pizzaArray);
-        pizzaArray[indx][0] = String.valueOf(indx + 1) + " " + name + " " + size + newline;
-        pizzaArray[indx][1] = description + newline;
-        pizzaArray[indx][2] = moneyBought + newline;
-        pizzaArray[indx][3] = moneySold + newline;
-        pizzaArray[indx][4] = moneyInHand + newline;
+        pizzaArray[indx][0] = String.valueOf(indx + 1) + " " + name + " " + size;
+        pizzaArray[indx][1] = description;
+        pizzaArray[indx][2] = moneyBought;
+        pizzaArray[indx][3] = moneySold;
+        pizzaArray[indx][4] = moneyInHand;
         indx ++;
         fM.FileWrite("pizza.txt" , pizzaArray , indx);
     }
@@ -101,7 +101,7 @@ public class Pizza extends Product {
         int indx = seeLenght(pizzaArray);
         for(int i=0;i<indx;i++)
             for(int j=0;j<5;j++)
-                System.out.print(pizzaArray[i][j]);
+                System.out.println(pizzaArray[i][j]);
         System.out.print("Въведете номера на пицата, която ще поръчате:");
         Scanner in = new Scanner(System.in);
         int numPizza = in.nextInt();

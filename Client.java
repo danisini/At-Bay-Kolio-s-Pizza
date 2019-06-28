@@ -7,12 +7,14 @@ public class Client {
         Scanner in = new Scanner(System.in);
         int type = in.nextInt();
         if (type == 1) {
-            Pizza p=new Pizza();
+            Pizza p = new Pizza();
             p.buyPizza();
         } else if (type == 2) {
-
+            Drink d = new Drink();
+            d.buyDrink();
         } else if (type == 3) {
-
+            Desert d = new Desert();
+            d.buyDesert();
         }
     }
 }

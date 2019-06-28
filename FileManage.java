@@ -38,7 +38,7 @@ public class FileManage {
             FileWriter myWriter = new FileWriter(pizzaFile);
             for(int i = 0 ; i < indx ; i ++)
                 for(int j = 0; j < 5 ; j ++)
-                    myWriter.write(array[i][j]);
+                    myWriter.write(array[i][j]+newline);
             myWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
