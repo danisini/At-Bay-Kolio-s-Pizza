@@ -45,4 +45,37 @@ public class FileManage {
             e.printStackTrace();
         }
     }
+    public double[] FileReadMoney()
+    {
+        double[] money;
+        money = new double[16];
+        int ind = 0;
+        try {
+            File myObj = new File("money.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                money[ind] = Double.valueOf(data);
+                ind ++;
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return money;
+    }
+    public void FileWriteMoney(double[] array)
+    {
+        try {
+            File moneyFile = new File("money.txt");
+            FileWriter myWriter = new FileWriter(moneyFile);
+            for(int i = 0 ; i < 9 ; i ++)
+                myWriter.write(String.valueOf(array[i]) + newline);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
 }
