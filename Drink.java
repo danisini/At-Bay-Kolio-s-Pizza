@@ -9,19 +9,6 @@ public class Drink extends Product {
     private String size , name ,description;//big,medium,small
     public static String newline = System.getProperty("line.separator");
     private String[] pArray;
-    private int seeLenght(String[][] array)
-    {
-        int ind = 0;
-        for(int i = 0 ; i < 128 ; i ++)
-        {
-            if(array[i][0] == null)
-            {
-                ind = i;
-                break;
-            }
-        }
-        return ind;
-    }
     public void newDrink()
     {
         Scanner in = new Scanner(System.in);
@@ -40,7 +27,7 @@ public class Drink extends Product {
         String moneyBought = drink.getMoneyBought();
         String moneySold = drink.getMoneySold();
         String moneyInHand = drink.getInHand();
-        int indx = seeLenght(drinkArray);
+        int indx = fM.seeLenght(drinkArray);
         drinkArray[indx][0] = String.valueOf(indx + 1) + " " + name + " " + size;
         drinkArray[indx][1] = description;
         drinkArray[indx][2] = moneyBought;
@@ -88,7 +75,7 @@ public class Drink extends Product {
             default:changed = "";
         }
         drinkArray[number-1][menuChosen-1] = changed;
-        int indx = seeLenght(drinkArray);
+        int indx = fM.seeLenght(drinkArray);
         fM.FileWrite("drink.txt",drinkArray,indx);
     }
     public void buyDrink()
@@ -97,7 +84,7 @@ public class Drink extends Product {
         drinkArray = new String[128][8];
         FileManage fM = new FileManage();
         drinkArray = fM.FileRead("drink.txt");
-        int indx = seeLenght(drinkArray);
+        int indx = fM.seeLenght(drinkArray);
         for(int i=0;i<indx;i++)
             for(int j=0;j<5;j++)
                 System.out.println(drinkArray[i][j]);
@@ -132,7 +119,7 @@ public class Drink extends Product {
         String[][] drinkArray;
         drinkArray = new String[128][8];
         drinkArray = fM.FileRead("drink.txt");
-        int indx = seeLenght(drinkArray);
+        int indx = fM.seeLenght(drinkArray);
         int lost = Integer.valueOf(drinkArray[numberDrink - 1][4])-cntDrink;
         drinkArray[numberDrink - 1][4] = String.valueOf(lost);
         double lose = cntDrink*Double.valueOf(drinkArray[numberDrink - 1][2]);

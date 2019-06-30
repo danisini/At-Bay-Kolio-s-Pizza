@@ -9,6 +9,19 @@ import java.util.Scanner;
 public class FileManage {
     private static String newline = System.getProperty("line.separator");
     private String[][] pArray;
+    public int seeLenght(String[][] array)
+    {
+        int ind = 0;
+        for(int i = 0 ; i < 128 ; i ++)
+        {
+            if(array[i][0] == null)
+            {
+                ind = i;
+                break;
+            }
+        }
+        return ind;
+    }
     public String[][] FileRead(String pathName)
     {
         int indx = 0;

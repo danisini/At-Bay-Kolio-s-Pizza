@@ -7,55 +7,14 @@ import java.nio.file.Path;
 import java.util.Scanner;
 public class Admin {
     public Admin() {
-        System.out.print("Въведи 1 за списък с продукти с наличност<5,2 за разглеждане на продукти:");
+        System.out.print("Въведи 1 за разглеждане на продукти, 2 за списък с продукти с наличност по-малка от 5:");
         Scanner in = new Scanner(System.in);
         int typeIn = in.nextInt();
-        if (typeIn == 1) {//list
-            try {
-                File myObj = new File("pizza.txt");
-                Scanner myReader = new Scanner(myObj);
-                while (myReader.hasNextLine()) {
-                    String name = myReader.nextLine();
-                    String priceB= myReader.nextLine();
-                    String priceN = myReader.nextLine();
-                    String diff = myReader.nextLine();
-                    String inHand = myReader.nextLine();
-                    if(Integer.valueOf(inHand)<5)System.out.println(name);
-                }
-                myReader.close();
-
-                myObj = new File("drink.txt");
-                myReader = new Scanner(myObj);
-                while (myReader.hasNextLine()) {
-                    String name = myReader.nextLine();
-                    String priceB= myReader.nextLine();
-                    String priceN = myReader.nextLine();
-                    String diff = myReader.nextLine();
-                    String inHand = myReader.nextLine();
-                    if(Integer.valueOf(inHand)<5)System.out.println(name);
-                }
-                myReader.close();
-                myObj = new File("desert.txt");
-                myReader = new Scanner(myObj);
-                while (myReader.hasNextLine()) {
-                    String name = myReader.nextLine();
-                    String priceB= myReader.nextLine();
-                    String priceN = myReader.nextLine();
-                    String diff = myReader.nextLine();
-                    String inHand = myReader.nextLine();
-                    if(Integer.valueOf(inHand)<5)System.out.println(name);
-                }
-                myReader.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        }
-        else if(typeIn==2)
+        if(typeIn == 1)
         {
             System.out.print("За пици-въведете 1, за напитки-2, за десерти-3:");
-            int typeProduct=in.nextInt();
-            if(typeProduct==1) {
+            int typeProduct = in.nextInt();
+            if(typeProduct == 1) {
                 System.out.println("Ако искате да въведете нова пица-въведете 0,за редактиране-веведете номера на пицата,за отблеязване на фира-въведете -1:");
                 try {
                     File myObj = new File("pizza.txt");
@@ -148,6 +107,33 @@ public class Admin {
                     Desert de = new Desert();
                     de.EditDesert(desertNumber);
                 }
+            }
+        }
+        else if(typeIn == 2)
+        {
+            FileManage fM = new FileManage();
+            String[][] array;
+            int size;
+            array = fM.FileRead("pizza.txt");
+            size = fM.seeLenght(array);
+            for(int i = 0 ; i < size ; i ++)
+            {
+                if(Integer.valueOf(array[i][4])<5)
+                    System.out.println(array[i][0]);
+            }
+            array = fM.FileRead("drink.txt");
+            size = fM.seeLenght(array);
+            for(int i = 0 ; i < size ; i ++)
+            {
+                if(Integer.valueOf(array[i][4])<5)
+                    System.out.println(array[i][0]);
+            }
+            array = fM.FileRead("desert.txt");
+            size = fM.seeLenght(array);
+            for(int i = 0 ; i < size ; i ++)
+            {
+                if(Integer.valueOf(array[i][4])<5)
+                    System.out.println(array[i][0]);
             }
         }
     }

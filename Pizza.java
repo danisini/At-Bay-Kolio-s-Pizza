@@ -10,19 +10,6 @@ public class Pizza extends Product {
     private String size , name ,description;//big,medium,small
     public static String newline = System.getProperty("line.separator");
     private String[] pArray;
-    private int seeLenght(String[][] array)
-    {
-        int ind = 0;
-        for(int i = 0 ; i < 128 ; i ++)
-        {
-            if(array[i][0] == null)
-            {
-                ind = i;
-                break;
-            }
-        }
-        return ind;
-    }
     public void newPizza()
     {
         Scanner in = new Scanner(System.in);
@@ -41,7 +28,7 @@ public class Pizza extends Product {
         String moneyBought = pizza.getMoneyBought();
         String moneySold = pizza.getMoneySold();
         String moneyInHand = pizza.getInHand();
-        int indx = seeLenght(pizzaArray);
+        int indx = fM.seeLenght(pizzaArray);
         pizzaArray[indx][0] = String.valueOf(indx + 1) + " " + name + " " + size;
         pizzaArray[indx][1] = description;
         pizzaArray[indx][2] = moneyBought;
@@ -89,7 +76,7 @@ public class Pizza extends Product {
             default:changed = "";
         }
         pizzaArray[number-1][menuChosen-1] = changed;
-        int indx = seeLenght(pizzaArray);
+        int indx = fM.seeLenght(pizzaArray);
         fM.FileWrite("pizza.txt",pizzaArray,indx);
     }
     public void buyPizza()
@@ -98,7 +85,7 @@ public class Pizza extends Product {
         pizzaArray = new String[128][8];
         FileManage fM = new FileManage();
         pizzaArray = fM.FileRead("pizza.txt");
-        int indx = seeLenght(pizzaArray);
+        int indx = fM.seeLenght(pizzaArray);
         for(int i=0;i<indx;i++)
             for(int j=0;j<5;j++)
                 System.out.println(pizzaArray[i][j]);
@@ -133,7 +120,7 @@ public class Pizza extends Product {
         String[][] pizzaArray;
         pizzaArray = new String[128][8];
         pizzaArray = fM.FileRead("pizza.txt");
-        int indx = seeLenght(pizzaArray);
+        int indx = fM.seeLenght(pizzaArray);
         int lost = Integer.valueOf(pizzaArray[numberPizza - 1][4])-cntPizza;
         pizzaArray[numberPizza - 1][4] = String.valueOf(lost);
         double lose = cntPizza*Double.valueOf(pizzaArray[numberPizza - 1][2]);

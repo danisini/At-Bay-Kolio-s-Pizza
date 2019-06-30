@@ -9,19 +9,6 @@ public class Desert extends Product {
     private String size , name ,description;//big,medium,small
     public static String newline = System.getProperty("line.separator");
     private String[] pArray;
-    private int seeLenght(String[][] array)
-    {
-        int ind = 0;
-        for(int i = 0 ; i < 128 ; i ++)
-        {
-            if(array[i][0] == null)
-            {
-                ind = i;
-                break;
-            }
-        }
-        return ind;
-    }
     public void newDesert()
     {
         Scanner in = new Scanner(System.in);
@@ -40,7 +27,7 @@ public class Desert extends Product {
         String moneyBought = desert.getMoneyBought();
         String moneySold = desert.getMoneySold();
         String moneyInHand = desert.getInHand();
-        int indx = seeLenght(desertArray);
+        int indx = fM.seeLenght(desertArray);
         desertArray[indx][0] = String.valueOf(indx + 1) + " " + name + " " + size;
         desertArray[indx][1] = description;
         desertArray[indx][2] = moneyBought;
@@ -88,7 +75,7 @@ public class Desert extends Product {
             default:changed = "";
         }
         desertArray[number-1][menuChosen-1] = changed;
-        int indx = seeLenght(desertArray);
+        int indx = fM.seeLenght(desertArray);
         fM.FileWrite("desert.txt",desertArray,indx);
     }
     public void buyDesert()
@@ -97,7 +84,7 @@ public class Desert extends Product {
         desertArray = new String[128][8];
         FileManage fM = new FileManage();
         desertArray = fM.FileRead("desert.txt");
-        int indx = seeLenght(desertArray);
+        int indx = fM.seeLenght(desertArray);
         for(int i=0;i<indx;i++)
             for(int j=0;j<5;j++)
                 System.out.println(desertArray[i][j]);
@@ -132,7 +119,7 @@ public class Desert extends Product {
         String[][] desertArray;
         desertArray = new String[128][8];
         desertArray = fM.FileRead("desert.txt");
-        int indx = seeLenght(desertArray);
+        int indx = fM.seeLenght(desertArray);
         int lost = Integer.valueOf(desertArray[numberDesert - 1][4])-cntDesert;
         desertArray[numberDesert - 1][4] = String.valueOf(lost);
         double lose = cntDesert*Double.valueOf(desertArray[numberDesert - 1][2]);
